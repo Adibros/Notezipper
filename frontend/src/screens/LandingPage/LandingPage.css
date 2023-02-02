@@ -1,0 +1,64 @@
+.main{
+    min-height: 93vh;
+    display: flex;
+    align-items: center;
+    background-image: url('../../background1.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+/* .main::before{
+    min-height: 93vh;
+    display: flex;
+    align-items: center;
+    background-image: url('../../bg.jpg');
+    background-position: center;
+    background-size: cover;
+} */
+
+.title{
+    /* color: white; */
+    font-weight: 700;
+    font-size: 48px;
+}
+
+.subtitle{
+    /* color: white; */
+    font-size: 25px;
+    padding-top: 10px;
+}
+
+.intro-text{
+    width: 100%;
+    text-align: center;
+}
+
+.button-container{
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.landingbutton{
+    width: 200px;
+    height: 55px;
+}
+
+@media only screen and (min-width: 1200px) {
+    .buttonContainer {
+      padding: 0 200px;
+    }
+    .title {
+      padding: 0 100px;
+    }
+}
+  
+@media only screen and (max-width: 768px) {
+    .title {
+      font-size: 50px;
+    }
+    .landingbutton {
+      width: 150px;
+      height: 50px;
+    }
+}
