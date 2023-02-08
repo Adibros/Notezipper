@@ -1,10 +1,12 @@
 const express = require('express');
 const notes = require("./data/notes");
 const dotenv = require('dotenv');
+const connectDb = require('./config/db');
+
 
 const app = express();
 dotenv.config();
-
+connectDb();
 
 
 app.get('/', (req,res) =>{
@@ -22,8 +24,8 @@ app.get('/api/notes/:id', (req,res) =>{
     res.json(note);
 })
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
-app.listen(PORT,() =>{
-    console.log(`SERVER RUNNING AT PORT ${PORT}`);
+app.listen(5000,() =>{
+    console.log(`SERVER RUNNING AT PORT 5000`);
 })
