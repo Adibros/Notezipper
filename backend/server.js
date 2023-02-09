@@ -3,6 +3,7 @@ const notes = require("./data/notes");
 const dotenv = require('dotenv');
 const connectDb = require('./config/db');
 const userRoutes = require('./routes/userRoutes');
+const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 
 
 const app = express();
@@ -29,6 +30,9 @@ app.get('/api/notes/:id', (req,res) =>{
 
     res.json(note);
 })
+
+app.use(notFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT;
 
