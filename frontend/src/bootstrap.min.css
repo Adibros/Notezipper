@@ -4039,9 +4039,9 @@ fieldset:disabled .btn {
   padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
   margin-bottom: 0;
   color: var(--bs-card-cap-color);
-  background-color: var(--bs-card-cap-bg);
   border-bottom: var(--bs-card-border-width) solid var(--bs-card-border-color);
 }
+
 .card-footer {
   padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
   color: var(--bs-card-cap-color);
@@ -4170,7 +4170,6 @@ fieldset:disabled .btn {
   z-index: 3;
   border-color: var(--bs-accordion-btn-focus-border-color);
   outline: 0;
-  box-shadow: var(--bs-accordion-btn-focus-box-shadow);
 }
 .accordion-header {
   margin-bottom: 0;

@@ -2,11 +2,15 @@ const express = require('express');
 const notes = require("./data/notes");
 const dotenv = require('dotenv');
 const connectDb = require('./config/db');
+const userRoutes = require('./routes/userRoutes');
 
 
 const app = express();
 dotenv.config();
 connectDb();
+app.use(express.json());
+
+
 
 
 app.get('/', (req,res) =>{
@@ -16,6 +20,8 @@ app.get('/', (req,res) =>{
 app.get('/api/notes', (req,res) =>{
     res.json(notes);
 })
+
+app.use('/api/users',userRoutes);
 
 app.get('/api/notes/:id', (req,res) =>{
     
