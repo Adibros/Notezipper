@@ -38,4 +38,4 @@ const PORT = process.env.PORT;
 
 app.listen(5000,() =>{
     console.log(`SERVER RUNNING AT PORT 5000`);
-})
+});
