@@ -1,9 +1,12 @@
 import {Navbar,Container,Nav,NavDropdown,Form} from 'react-bootstrap';
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 
 
 const Header = () => {
+
+  const navigate = useNavigate();
+
   return (
     <Navbar className="navbar navbar-expand-lg navbar-dark bg-primary" expand="lg" >
       <Container >
@@ -35,7 +38,10 @@ const Header = () => {
               <NavDropdown.Item href="#action3">My profile</NavDropdown.Item>
               
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
+              <NavDropdown.Item onClick={() =>{
+                localStorage.removeItem("userInfo");
+                navigate("/");
+              }}>
                 Logout
               </NavDropdown.Item>
             </NavDropdown>
