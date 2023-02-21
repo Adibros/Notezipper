@@ -1,11 +1,23 @@
 import {Navbar,Container,Nav,NavDropdown,Form} from 'react-bootstrap';
 import React from 'react'
 import { Link,useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../redux/userActions';
 
 
 const Header = () => {
 
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector(state => state.userLogin);
+  const {userInfo} = userLogin;
+
+  const logoutHandler = () =>{
+    dispatch(logout());
+    navigate('/');
+  }
 
   return (
     <Navbar className="navbar navbar-expand-lg navbar-dark bg-primary" expand="lg" >
@@ -38,10 +50,7 @@ const Header = () => {
               <NavDropdown.Item href="#action3">My profile</NavDropdown.Item>
               
               <NavDropdown.Divider />
-              <NavDropdown.Item onClick={() =>{
-                localStorage.removeItem("userInfo");
-                navigate("/");
-              }}>
+              <NavDropdown.Item onClick={logoutHandler}>
                 Logout
               </NavDropdown.Item>
             </NavDropdown>
