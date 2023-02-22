@@ -1,10 +1,12 @@
-import {React , useState} from 'react'
+import {React , useEffect, useState} from 'react'
 import { Form,Button,Row,Col } from 'react-bootstrap'
 import ErrorMessage from '../../components/ErrorMessage';
 import MainScreen from '../../components/MainScreen'
 import axios from 'axios';
+import { useDispatch , useSelector } from 'react-redux';
 import Loading from '../../components/Loading';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { register } from '../../redux/userActions';
 
 const RegisterScreen = () => {
 
@@ -14,35 +16,29 @@ const RegisterScreen = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
   
-  
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
-  const submitHandler = async(e) =>{
+  const navigate = useNavigate();
+
+
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading,error,userInfo } = userRegister;
+
+
+  useEffect(() => {
+    if(userInfo){
+      navigate('/mynotes');
+    }
+  }, [userInfo,navigate]);
+  
+
+  const submitHandler = (e) =>{
     e.preventDefault();
 
     if(password!== confirmPassword){
       setMessage('Passwords Do not Match');
     }else{
-        setMessage(null);
-        try {
-          const config = {
-            headers : {
-              "Content-type":"application/json"
-            },
-          };
-
-          setLoading(true);
-
-          const { data } = await axios.post("/api/users",{name,email,password},config);
-          
-          console.log(data);
-          setLoading(false);
-          localStorage.setItem("userInfo",JSON.stringify(data));
-
-        } catch (error) {
-          setError(error.response.data.message);
-        }
+        dispatch(register(name,email,password));   
     }
   }
 
