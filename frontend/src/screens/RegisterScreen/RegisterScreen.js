@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useDispatch , useSelector } from 'react-redux';
 import Loading from '../../components/Loading';
 import { Link, useNavigate } from 'react-router-dom'
-import { register } from '../../redux/userActions';
+import { register } from '../../redux/actions/userActions';
 
 const RegisterScreen = () => {
 
