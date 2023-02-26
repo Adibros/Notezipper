@@ -7,9 +7,9 @@ import Loading from '../../components/Loading';
 import ErrorMessage from '../../components/ErrorMessage';
 
 import axios from "axios";
-import { listNotes } from '../../redux/actions/notesActions';
+import { deleteNoteAction, listNotes } from '../../redux/actions/notesActions';
 
-const MyNotes = () => {
+const MyNotes = ({search}) => {
 
     const dispatch = useDispatch();
     const noteList = useSelector(state => state.noteList)
@@ -19,7 +19,15 @@ const MyNotes = () => {
     const { userInfo } = userLogin;
 
     const noteCreate = useSelector(state => state.noteCreate);
-    const { success } = noteCreate;
+    const { success:successCreate } = noteCreate;
+
+    const noteUpdate = useSelector((state) => state.noteUpdate);
+    const { success:successUpdate } = noteUpdate;
+    // rename this state success as successUpdate
+
+    const noteDelete = useSelector((state) => state.noteDelete);
+    const { loading:loadingDelete, error:errorDelete,success:successDelete } = noteDelete;
+    
 
 
     const navigate = useNavigate();
@@ -29,12 +37,12 @@ const MyNotes = () => {
         if(!userInfo){  
             navigate('/')
         }
-    }, [dispatch,success,userInfo])
+    }, [dispatch,successCreate,successUpdate,userInfo,successDelete])
     
 
     const deleteHandler = (id) =>{
         if(window.confirm("Are you sure")){
-
+            dispatch(deleteNoteAction(id));
         }
     }
 
@@ -45,10 +53,19 @@ const MyNotes = () => {
                 Create New Note
             </Button>
         </Link>
+        {errorDelete && (
+            <ErrorMessage variant='danger'>{errorDelete}</ErrorMessage>
+        )}
+        {loadingDelete && <Loading/>}
         {error && <ErrorMessage variant='danger'>{error}</ErrorMessage>}
         {loading && <Loading />}
             {
-                notes?.reverse().map(note =>(
+                notes
+                    ?.reverse()
+                    .filter((filteredNote) =>
+                        filteredNote.title.toLowerCase().includes(search.toLowerCase())
+                    )
+                    .map(note =>(
                     <Accordion key={note._id}>
                     <Accordion.Item eventKey="0">
                         <Card style={{margin : 10}}>
