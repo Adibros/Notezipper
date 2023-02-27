@@ -18,7 +18,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header setSearch = {setSearch} />
+      <Header setsearch = {setSearch} />
       <main>
         <Routes>
           <Route path="/" element={<LandingPage/>} />

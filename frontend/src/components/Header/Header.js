@@ -1,11 +1,11 @@
 import {Navbar,Container,Nav,NavDropdown,Form} from 'react-bootstrap';
 import React from 'react'
-import { Link,useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/actions/userActions';
 
 
-const Header = ( {setSearch} ) => {
+const Header = ( {setsearch} ) => {
 
   const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ const Header = ( {setSearch} ) => {
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
-                onChange={(e) => setSearch(e.target.value)}
+                onSubmit={(e) => setsearch(e.target.value)}
               /> 
             </Form>
           </Nav>
@@ -44,17 +44,17 @@ const Header = ( {setSearch} ) => {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
+            {userInfo && 
             <Nav.Link href="/mynotes">
               My Notes
-            </Nav.Link>
-            <NavDropdown title="Aditya" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">My profile</NavDropdown.Item>
+            </Nav.Link>}
+
+            {userInfo && <NavDropdown title={userInfo.name} id="navbarScrollingDropdown">            
               
-              <NavDropdown.Divider />
               <NavDropdown.Item onClick={logoutHandler}>
                 Logout
               </NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown>}
           </Nav>
           
         </Navbar.Collapse>
